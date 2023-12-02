@@ -4,6 +4,10 @@ author: R Keertish Kumar
 
 description: Connects repositories by pulling from one and pushing to another, facilitating seamless linkage between GitHub repositories for synchronized content or data transfer within automated workflows.
 
+branding:
+  icon: 'award'
+  color: 'green'
+
 inputs:
   source-repo:
     description: 'URL of the source repository to pull data from.'
@@ -33,6 +37,28 @@ inputs:
     description: 'Email of the GitHub user for commit attribution when pushing to the destination repository.'
     required: true
 
-branding:
-  icon: 'award'
-  color: 'green'
+permissions: write-all
+
+jobs:
+           
+  push-source-to-destination-repo:
+   
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: ${{ inputs.destination-repo}}
+        ref: ${{ inputs.destination-repo-branch}}
+        token: ${{ inputs.token }}
+
+    - name: Add source repo and pull to destination repo
+      run: |
+        
+        git remote add source ${{ inputs.source-repo}}
+        git config user.name ${{ inputs.git-user-name}}
+        git config user.email ${{ inputs.git-user-email}}
+        
+        git pull source ${{ inputs.source-repo-branch}}
+        #We use pull here to pull to the local system but when we need to push it to the remote repo ,we use push
+        #hence pull and push is used here
+        git push 
