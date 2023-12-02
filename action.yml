@@ -1,0 +1,38 @@
+name: Repo Linker
+
+author: R Keertish Kumar
+
+description: Connects repositories by pulling from one and pushing to another, facilitating seamless linkage between GitHub repositories for synchronized content or data transfer within automated workflows.
+
+inputs:
+  source-repo:
+    description: 'URL of the source repository to pull data from.'
+    required: true
+
+  source-repo-branch:
+    description: 'Branch name of the source repository from which data will be pulled.'
+    required: true
+
+  destination-repo:
+    description: 'Repository name with owner of the destination repository to push data to. Example, actions/checkout'
+    required: true
+
+  destination-repo-branch:
+    description: 'Branch name of the destination repository where data will be pushed.'
+    required: true
+
+  token:
+    description: 'Access token or personal access token (PAT) with repository access for repo and workflows.'
+    required: true
+
+  git-user-name:
+    description: 'GitHub username or the name to be associated with the commit when pushing to the destination repository.'
+    required: true
+
+  git-user-email:
+    description: 'Email of the GitHub user for commit attribution when pushing to the destination repository.'
+    required: true
+
+branding:
+  icon: 'award'
+  color: 'green'
